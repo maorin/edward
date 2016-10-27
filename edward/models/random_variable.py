@@ -57,7 +57,10 @@ class RandomVariable(object):
     self._kwargs = kwargs
     super(RandomVariable, self).__init__(*args, **kwargs)
     tf.add_to_collection(RANDOM_VARIABLE_COLLECTION, self)
-    self._value = self.sample()
+    try:
+      self._value = self.sample()
+    except:
+      self._value = None
 
   def __str__(self):
     return '<ed.RandomVariable \'' + self.name.__str__() + '\' ' + \
